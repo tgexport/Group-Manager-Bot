@@ -1,7 +1,7 @@
 {
   "name": "anarchyservice/group-manager-bot",
   "description": "PHP bot for telegram bots",
-  "type": "library",
+  "type": "project",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "license": "MIT",
