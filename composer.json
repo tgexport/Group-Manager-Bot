@@ -1,5 +1,5 @@
 {
-  "name": "anarchyservice/Group-Manager-Bot",
+  "name": "anarchyservice/group-manager-bot",
   "description": "PHP bot for telegram bots",
   "type": "library",
   "minimum-stability": "stable",
