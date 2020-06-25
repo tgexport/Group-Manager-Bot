@@ -2,7 +2,6 @@
   "name": "anarchyservice/group-manager-bot",
   "description": "PHP bot for telegram bots",
   "type": "project",
-  "minimum-stability": "dev",
   "license": "MIT",
   "keywords": ["telegram", "bot", "api", "oop", "PHP", "lib", "library", "php7"],
   "authors": [
@@ -12,8 +11,10 @@
   ],
   "require": {
     "php": ">=7.4.0",
-    "anarchyservice/anarchylib":"dev-master"
+    "anarchyservice/anarchylib":"^1"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "AnarchyService\\": "src/"
