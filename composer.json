@@ -3,7 +3,6 @@
   "description": "PHP bot for telegram bots",
   "type": "project",
   "minimum-stability": "dev",
-  "prefer-stable": true,
   "license": "MIT",
   "keywords": ["telegram", "bot", "api", "oop", "PHP", "lib", "library", "php7"],
   "authors": [
