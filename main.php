@@ -5,7 +5,7 @@ use AnarchyService\SendRequest\Send;
 require_once 'vendor/autoload.php';
 
 $bot = new Base();
-$bot = $bot->getWebhookUpdates();
+$bot = $bot->pollUpdates();
 $text = $bot->result->message->text;
 var_dump($text);
-if ($text == 'ali') Send::sendMessage(116948493,'test');
+Send::sendMessage(116948493,'test');
