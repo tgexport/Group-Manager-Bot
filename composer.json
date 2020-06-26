@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=7.4.0",
-    "anarchyservice/anarchylib":"^1"
+    "anarchyservice/anarchylib":"dev-master"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
