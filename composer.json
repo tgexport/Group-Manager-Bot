@@ -17,12 +17,7 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "AnarchyService\\": "src/"
+      "AnarchyService\\": "/"
     }
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "cd vendor/anarchyService/anarchylib/ && git submodule init && git submodule update"
-    ]
   }
 }
