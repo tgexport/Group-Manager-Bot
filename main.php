@@ -1,11 +1,23 @@
 <?php
 declare(strict_types=1);
+
 use AnarchyService\Base;
+use AnarchyService\Get;
 use AnarchyService\SendRequest\Send;
+
 require_once 'vendor/autoload.php';
 
-$bot = new Base();
-$bot = $bot->pollUpdates();
-$text = $bot->result->message->text;
-var_dump($text);
-Send::sendMessage(116948493,'test');
+$tg = new Base();
+/*if (isset($argv[1])) {
+    $argument = trim($argv[1]);
+    if ($argument != '') {
+        Get::set(file_get_contents($argument));
+        unlink($argument);
+    }
+} else {
+    Get::set($tg->getWebhookUpdates());
+}
+
+if (Get::$text == 'hi') Send::sendMessage(Get::$chat_id, 'Hello!');*/
+$admins=explode(',',getenv('ADMINS'));
+foreach ($admins as $admin) Send::sendMessage($admin, 'bot is run');

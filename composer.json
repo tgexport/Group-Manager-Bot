@@ -1,17 +1,21 @@
 {
   "name": "anarchyservice/group-manager-bot",
-  "description": "PHP bot for telegram bots",
+  "description": "PHP bot for Managing Telegram Groups",
   "type": "project",
   "license": "MIT",
+  "homepage": "https://AnarchyService.xyz",
   "keywords": ["telegram", "bot", "api", "oop", "PHP", "lib", "library", "php7"],
   "authors": [
     {
-      "name": "alireza sawari"
+      "name": "Alireza Sawari",
+      "email": "DyarWeb@Yahoo.Com",
+      "homepage": "https://DyarWeb.Com"
     }
   ],
   "require": {
     "php": ">=7.4.0",
-    "anarchyservice/anarchylib":"dev-master"
+    "anarchyservice/php-telegram-bot":"dev-master",
+    "ext-json": "*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
