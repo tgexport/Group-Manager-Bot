@@ -11,17 +11,17 @@ require_once 'vendor/autoload.php';
 
 $tg = new Base();
 $DB = DB::Database();
-if (isset($argv[1])) {
+if ($argv[1]) {
     $argument = trim($argv[1]);
     if ($argument != '') {
-        Get::set(file_get_contents($argument));
+        Get::set(json_decode(file_get_contents($argument)));
         unlink($argument);
     }
 } else {
     Get::set($tg->getWebhookUpdates());
 }
 
-$Group = $DB->SelectData('Database', Get::$chat_id);
+$Group = $DB->SelectData('Groups', Get::$chat_id);
 if (!$Group) {
     $Administrators = Chat::getChatAdministrators(Get::$chat_id)->result;
     $Admins = [];
@@ -83,7 +83,7 @@ if (!$Group) {
             'name' => 'وضعیت حذف فوروارد'
         ]
     ];
-    $DB->CreateTable('Database', Get::$chat_id, [
+    $DB->CreateTable('Groups', Get::$chat_id, [
         'Chat_id' => Get::$chat_id,
         'Chat_title' => Get::$chat_title,
         'BotAdder' => Get::$from_id,
@@ -93,5 +93,6 @@ if (!$Group) {
     ]);
     $msg = 'سلام'.PHP_EOL.'برای فعال سازی رایگان ربات، من رو به عنوان ادمین گروه انتخاب کنید'.PHP_EOL.'با فرستادن راهنما هم می‌توانید آموزش استفاده از ربات را یاد بگیرید 😃';
     Send::sendMessage(Get::$chat_id, $msg);
-    $Group = $DB->SelectData('Database', Get::$chat_id);
+    $Group = $DB->SelectData('Groups', Get::$chat_id);
 }
+if (Get::$text == 'hi') Send::sendMessage(Get::$chat_id, 'Hello!');
