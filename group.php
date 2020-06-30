@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-use AnarchyService\Base;
-use AnarchyService\DB\DB;
-use AnarchyService\Get;
-use AnarchyService\SendRequest\Chat;
-use AnarchyService\SendRequest\Send;
+use DyarWeb\Base;
+use DyarWeb\DB\DB;
+use DyarWeb\Get;
+use DyarWeb\SendRequest\Chat;
+use DyarWeb\SendRequest\Send;
 
 require_once 'vendor/autoload.php';
+
 
 $tg = new Base();
 $DB = DB::Database();
@@ -21,7 +22,7 @@ if ($argv[1]) {
     Get::set($tg->getWebhookUpdates());
 }
 
-$Group = $DB->SelectData('Groups', Get::$chat_id);
+$Group = $DB->SelectData('Groups', Get::$chat_id,['Chat_id'=>Get::$chat_id]);
 if (!$Group) {
     $Administrators = Chat::getChatAdministrators(Get::$chat_id)->result;
     $Admins = [];
@@ -93,6 +94,6 @@ if (!$Group) {
     ]);
     $msg = 'سلام'.PHP_EOL.'برای فعال سازی رایگان ربات، من رو به عنوان ادمین گروه انتخاب کنید'.PHP_EOL.'با فرستادن راهنما هم می‌توانید آموزش استفاده از ربات را یاد بگیرید 😃';
     Send::sendMessage(Get::$chat_id, $msg);
-    $Group = $DB->SelectData('Groups', Get::$chat_id);
+    $Group = $DB->SelectData('Groups', Get::$chat_id,['Chat_id'=>Get::$chat_id]);
 }
 if (Get::$text == 'hi') Send::sendMessage(Get::$chat_id, 'Hello!');

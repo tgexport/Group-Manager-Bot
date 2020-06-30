@@ -4,7 +4,7 @@ $input = file_get_contents("php://input");
 $obj = json_decode($input);
 $type = $obj->message->chat->type;
 if (function_exists('exec')) {
-    if (!is_dir('temp')) mkdir('temp',0755);
+    if (!is_dir('temp')) mkdir('temp',0700);
     $temp = "temp/.up_" . rand(0, 1000) . "" . time();
     file_put_contents($temp, $input);
     if ($type == 'private') exec("php private.php $temp > /dev/null &");
