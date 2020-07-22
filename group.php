@@ -1,11 +1,5 @@
 <?php
 declare(strict_types=1);
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-ini_set('ignore_repeated_errors', '1');
-ini_set('log_errors', '1');
-ini_set('error_log', 'error_log');
 
 use DyarWeb\Base;
 use DyarWeb\DB\DB;
@@ -562,31 +556,46 @@ if ($Group->Working) {
                     Send::sendMessage(Get::$chat_id, 'لطفا برای فعال سازی یا غیر فعال سازی کلیک کنید', 'HTML', false, false, null, $markup);
                 }
             } elseif (Get::$text == 'راهنما') {
-                $msg = '<strong>دستورات :</strong>
+                $msg = '<strong>دستورات عمومی :</strong>
+تنظیمات
+ثبت ادمین (با ریپلای)
+حذف ادمین (با ریپلای)
+لیست ادمین ها
+ریمو (با ریپلای)
+حذف 5 (حذف پیام های آخر بر حسب عدد)
+میوت 5 (با ریپلای و بر حسب دقیقه)
+اخطار (با ریپلای)
+حذف اخطار (با ریپلای)
+قفل کردن گروه
+باز کردن گروه
 
-                    تنظیمات
-                    ثبت ادمین (با ریپلای)
-                    حذف ادمین (با ریپلای)
-                    لیست ادمین ها
-                    حذف 5 (حذف پیام های آخر بر حسب عدد)
-                    میوت 5 (با ریپلای و بر حسب دقیقه)
-                    اخطار (با ریپلای)
-                    حذف اخطار (با ریپلای)
-                    قفل کردن گروه
-                    باز کردن گروه
-                    پیام خوش آمدگویی
-                    تغییر پیام خوش آمدگویی {متن}
+<strong>تغییر متن پیام‌های ربات :</strong>
 
+لیست پیام‌ ها
 
-                    <strong>متغیرها :</strong>
+<strong>فیلتر کلمات در گروه :</strong>
 
+فیلتر کلمه
+حذف فیلتر کلمه
+لیست فیلتر
+<strong>عضویت اجباری در کانال‌ها :</strong>
 
-                    $first_name
-                    $last_name
-                    $username
-                    $user_id
-                    $gp_name
-                    $GP_username';
+افزودن کانال آیدی
+حذف کانال آیدی
+لیست کانال ها
+
+<strong>متغیرها :</strong>
+
+~FIRST_NAME~
+~LAST_NAME~
+~USERNAME~
+~USER_ID~
+~GROUP_ID~
+~GROUP_TITLE~
+~GROUP_USERNAME~
+~NEW_USER_ID~
+~NEW_LAST_NAME~
+~NEW_USERNAME~';
                 Send::sendMessage(Get::$chat_id, $msg, 'HTML', false, false, null);
             } elseif (Get::$text == 'لیست پیام ها') {
                 $msg = 'پیام ها :';
