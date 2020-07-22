@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
+use DyarWeb\Get;
 use DyarWeb\Base;
 use DyarWeb\DB\DB;
-use DyarWeb\Get;
 use DyarWeb\SendRequest\Chat;
 use DyarWeb\SendRequest\Edit;
 use DyarWeb\SendRequest\Send;
+use DyarWeb\Clsses\GoogleTranslate;
 
 require_once 'vendor/autoload.php';
 
@@ -556,46 +557,7 @@ if ($Group->Working) {
                     Send::sendMessage(Get::$chat_id, 'لطفا برای فعال سازی یا غیر فعال سازی کلیک کنید', 'HTML', false, false, null, $markup);
                 }
             } elseif (Get::$text == 'راهنما') {
-                $msg = '<strong>دستورات عمومی :</strong>
-تنظیمات
-ثبت ادمین (با ریپلای)
-حذف ادمین (با ریپلای)
-لیست ادمین ها
-ریمو (با ریپلای)
-حذف 5 (حذف پیام های آخر بر حسب عدد)
-میوت 5 (با ریپلای و بر حسب دقیقه)
-اخطار (با ریپلای)
-حذف اخطار (با ریپلای)
-قفل کردن گروه
-باز کردن گروه
-
-<strong>تغییر متن پیام‌های ربات :</strong>
-
-لیست پیام‌ ها
-
-<strong>فیلتر کلمات در گروه :</strong>
-
-فیلتر کلمه
-حذف فیلتر کلمه
-لیست فیلتر
-<strong>عضویت اجباری در کانال‌ها :</strong>
-
-افزودن کانال آیدی
-حذف کانال آیدی
-لیست کانال ها
-
-<strong>متغیرها :</strong>
-
-~FIRST_NAME~
-~LAST_NAME~
-~USERNAME~
-~USER_ID~
-~GROUP_ID~
-~GROUP_TITLE~
-~GROUP_USERNAME~
-~NEW_USER_ID~
-~NEW_LAST_NAME~
-~NEW_USERNAME~';
+                $msg = "<strong>دستورات عمومی :</strong> \nتنظیمات\nثبت ادمین (با ریپلای)\nحذف ادمین (با ریپلای)\nلیست ادمین ها\nریمو (با ریپلای)\nحذف 5 (حذف پیام های آخر بر حسب عدد)\nمیوت 5 (با ریپلای و بر حسب دقیقه)\nاخطار (با ریپلای)\nحذف اخطار (با ریپلای)\nقفل کردن گروه\nباز کردن گروه\n\n <strong>تغییر متن پیام‌های ربات :</strong> \nلیست پیام‌ ها\n\n <strong>فیلتر کلمات در گروه :</strong>\nفیلتر کلمه\nحذف فیلتر کلمه\nلیست فیلتر\n\n<strong>عضویت اجباری در کانال‌ها :</strong>\nافزودن کانال آیدی\nحذف کانال آیدی\nلیست کانال ها\n\n <strong>متغیرها :</strong> \n\n~FIRST_NAME~\n~LAST_NAME~\n~USERNAME~\n~USER_ID~\n~GROUP_ID~\n~GROUP_TITLE~\n~GROUP_USERNAME~\n~NEW_USER_ID~\n~NEW_LAST_NAME~\n~NEW_USERNAME~";
                 Send::sendMessage(Get::$chat_id, $msg, 'HTML', false, false, null);
             } elseif (Get::$text == 'لیست پیام ها') {
                 $msg = 'پیام ها :';
@@ -734,11 +696,11 @@ if ($Group->Working) {
                 $Group->MSGs->ForceChannelJoinMSG->MSG = $match[1];
                 $DB->UpdateData('Groups/' . Get::$chat_id, Get::$chat_id, ['MSGs' => $Group->MSGs], ['Chat_id' => Get::$chat_id]);
                 Send::sendMessage(Get::$chat_id, 'پیام با موفقیت تغییر کرد', null, false, false, Get::$message_id);
-            } elseif (preg_match('~^تغییر پیام افزودن اجباری (.*)~', Get::$text, $match)) {
+            } elseif (preg_match('~^تغییر پیام اد اجباری (.*)~', Get::$text, $match)) {
                 $Group->MSGs->ForceADDMSG->MSG = $match[1];
                 $DB->UpdateData('Groups/' . Get::$chat_id, Get::$chat_id, ['MSGs' => $Group->MSGs], ['Chat_id' => Get::$chat_id]);
                 Send::sendMessage(Get::$chat_id, 'پیام با موفقیت تغییر کرد', null, false, false, Get::$message_id);
-            } elseif (preg_match('~^تغییر پیام هشدار اسپم (.*)~', Get::$text, $match)) {
+            } elseif (preg_match('~^تغییر پیام گذارش اسپم (.*)~', Get::$text, $match)) {
                 $Group->MSGs->SpamReportMSG->MSG = $match[1];
                 $DB->UpdateData('Groups/' . Get::$chat_id, Get::$chat_id, ['MSGs' => $Group->MSGs], ['Chat_id' => Get::$chat_id]);
                 Send::sendMessage(Get::$chat_id, 'پیام با موفقیت تغییر کرد', null, false, false, Get::$message_id);
@@ -746,7 +708,7 @@ if ($Group->Working) {
                 $Group->MSGs->WarnMSG->MSG = $match[1];
                 $DB->UpdateData('Groups/' . Get::$chat_id, Get::$chat_id, ['MSGs' => $Group->MSGs], ['Chat_id' => Get::$chat_id]);
                 Send::sendMessage(Get::$chat_id, 'پیام با موفقیت تغییر کرد', null, false, false, Get::$message_id);
-            } elseif (preg_match('~^تغییر پیام اخطار ربات (.*)~', Get::$text, $match)) {
+            } elseif (preg_match('~^تغییر پیام اخطار اسپم (.*)~', Get::$text, $match)) {
                 $Group->MSGs->BotWarnMSG->MSG = $match[1];
                 $DB->UpdateData('Groups/' . Get::$chat_id, Get::$chat_id, ['MSGs' => $Group->MSGs], ['Chat_id' => Get::$chat_id]);
                 Send::sendMessage(Get::$chat_id, 'پیام با موفقیت تغییر کرد', null, false, false, Get::$message_id);
@@ -764,6 +726,33 @@ if ($Group->Working) {
                 $User = $DB->SelectData('Users', Get::$reply_to_from_id, ['User_id' => Get::$reply_to_from_id]);
                 $DB->UpdateData('Users/' , Get::$reply_to_from_id, ['ThankCount' => ++$User->ThankCount], ['User_id' => Get::$reply_to_from_id]);
             }
+        } elseif ((Get::$text == 'فارسی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'fa', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'انگلیسی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'en', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'ایتالیایی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'it', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'فرانسوی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'fr', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'آلمانی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'de', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'ترکی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'tr', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'عربی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'ar', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'ژاپنی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'ja', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
+        } elseif ((Get::$text == 'چینی') && ($text = Get::$reply_to_text ?? Get::$reply_to_caption) && isset($text)) {
+            $msg = GoogleTranslate::translate('auto', 'zh', $text);
+            Send::sendMessage(Get::$chat_id , $msg ,null , false ,false, Get::$message_id);
         }
     } else {
         if ($Group->Settings->InfoMSGStatus->Value && (preg_match('~^(ربات)? ?من$~', Get::$text) || preg_match('~^me$~i', Get::$text) || preg_match('~^info$~i', Get::$text))) {
