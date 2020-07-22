@@ -2,7 +2,7 @@
   "name": "dyarweb/group-manager-bot",
   "description": "PHP bot Telegram Groups manager",
   "type": "project",
-  "license": "GPL3",
+  "license": "AGPL-3.0-or-later",
   "homepage": "https://DyarWeb.Com",
   "keywords": ["telegram", "bot", "api", "oop", "PHP", "full", "project", "php7", "manager"],
   "authors": [
