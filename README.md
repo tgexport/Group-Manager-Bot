@@ -15,8 +15,6 @@ Easy Use Group Manager Bot on Telegram Groups
  <p>
   <br>
 <b>How To Use Group Manager Bot on Groups </b>
-
-- Just Add [@AnarchyService_Bot](https://telegram.me/AnarchyService_Bot) On Your Group :)
 <br>
  <p>
 <b>How To Use Group Manager Bot Source </b>
@@ -24,7 +22,7 @@ Easy Use Group Manager Bot on Telegram Groups
 - Run Composer create-project
 
 ```php
-composer create-project dyarweb/group-manager-bot
+composer create-project tgexport/group-manager-bot
 ```
 - You're env.php file should be something like env.php.sample, then you gotta set a webhook on hook.php
 
