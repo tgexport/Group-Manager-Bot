@@ -14,13 +14,13 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "tgexport/php-telegram-bot":"dev-master"
+    "tgexport/php-telegram-bot":"dev-master@dev"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "DyarWeb\\": "Classes/"
+      "tgexport\\": "Classes/"
     }
   },
   "scripts": {
