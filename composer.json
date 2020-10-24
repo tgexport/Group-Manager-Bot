@@ -14,10 +14,9 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "tgexport/php-telegram-bot":"dev-master@dev"
+    "tgexport/php-telegram-bot":"dev"
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "tgexport\\": "Classes/"
